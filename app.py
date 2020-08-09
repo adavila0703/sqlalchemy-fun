@@ -1,18 +1,22 @@
 from flask import Flask
-from flask_restful import Api, Resource, reqparse
-from create_tables import maketable
-import sqlite3
-from resources.resources import Bank, User
+from flask_restful import Api
+from resources.resources import Bank, User, Test
+
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bankdata.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
 
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+
 api.add_resource(Bank, '/bank')
 api.add_resource(User, '/user')
-
-maketable()
+api.add_resource(Test, '/test/<string:username>')
 
 if __name__ == '__main__':
     from db import db
