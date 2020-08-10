@@ -8,12 +8,11 @@ class UserModel(db.Model):
     money = db.Column(db.Integer)
 
     bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'))
-    bank = db.relationship('BankModel')
+    banks = db.relationship('BankModel')
 
-    def __init__(self, username, money, bank_id):
+    def __init__(self, username, money):
         self.username = username
         self.money = money
-        self.bank_id = bank_id
 
     @classmethod
     def find_user(cls, username):
@@ -27,7 +26,7 @@ class UserModel(db.Model):
     def get_all_users(cls):
         templist = []
         for c in cls.query.all():
-            tempdict = {'username': c.username, 'money': c.money}
+            tempdict = {'username': c.username, 'money': c.money, 'bankid': c.banks}
             templist.append(tempdict)
         return templist
 
