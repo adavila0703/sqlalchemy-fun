@@ -6,7 +6,7 @@ class BankModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
 
-    user = db.relationship('UserModel', lazy='dynamic')
+    user = db.relationship('UserModel')
 
     def __init__(self, name):
         self.name = name

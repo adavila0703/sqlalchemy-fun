@@ -10,9 +10,10 @@ class UserModel(db.Model):
     bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'))
     bank = db.relationship('BankModel')
 
-    def __init__(self, username, money):
+    def __init__(self, username, money, bank_id):
         self.username = username
         self.money = money
+        self.bank_id = bank_id
 
     @classmethod
     def find_user(cls, username):

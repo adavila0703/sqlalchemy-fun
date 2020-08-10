@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
-from resources.resources import Bank, User, Test
+from resources.user import User, Test
+from resources.bank import Bank, BankList
 
 
 app = Flask(__name__)
