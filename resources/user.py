@@ -15,11 +15,6 @@ class User(Resource):
                        required=True,
                        help='money needed'
                        )
-    parse.add_argument('owner',
-                       type=str,
-                       required=True,
-                       help='Owner needed'
-                       )
 
     def get(self):
         return UserModel.get_all_users()
@@ -31,7 +26,7 @@ class User(Resource):
         if UserModel.find_user(data['username']):
             return {'message': 'user is already created'}
         else:
-            new_user = UserModel(data['username'], data['money'], owner=data['owner'])
+            new_user = UserModel(data['username'], data['money'])
             new_user.save_to_db()
             return {'message': 'user added!'}
 
