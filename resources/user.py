@@ -31,7 +31,16 @@ class User(Resource):
             return {'message': 'user added!'}
 
     def delete(self):
-        pass
+        parse = reqparse.RequestParser()
+        parse.add_argument('username',
+                           type=str,
+                           required=True,
+                           help='username needed'
+                           )
+        data = parse.parse_args()
+        user = UserModel.find_user(data['username'])
+        print(user)
+        return {'message': 'Person deleted'}
 
     def put(self):
         pass

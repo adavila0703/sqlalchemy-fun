@@ -34,6 +34,7 @@ class UserModel(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def delete_from_db(self):
-        db.session.delete(self)
+    @classmethod
+    def delete_from_db(cls, name):
+        db.session.delete(name)
         db.session.commit()
